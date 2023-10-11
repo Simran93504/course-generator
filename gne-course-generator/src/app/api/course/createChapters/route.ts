@@ -33,7 +33,7 @@ export async function POST(req: Request, res: Response) {
     let output_units: outputUnits = await strict_output(
       "You are an AI capable of curating course content, coming up with relevant chapter titles, and finding relevant youtube videos for each chapter",
       new Array(units.length).fill(
-        `It is your job to create a course about ${title}. The user has requested to create chapters for each of the units. Then, for each chapter, provide a detailed youtube search query that can be used to find an informative educationalvideo for each chapter. Each query should give an educational informative course in youtube.`
+        `It is your job to create a course about ${title}. The user has requested to create chapters under each of the ${units}.chapters should be concrete , enough to explain a topic and more than three. Then, for each chapter, provide a detailed youtube search query that can be used to find an informative educationalvideo for each chapter. Each query should give an educational informative course in youtube.`
       ),
       {
         title: "title of the unit",
@@ -78,7 +78,7 @@ export async function POST(req: Request, res: Response) {
         }),
       });
     }
-    await prisma.user.update({
+    await prisma.user.updateMany({
       where: {
         id: session.user.id,
       },

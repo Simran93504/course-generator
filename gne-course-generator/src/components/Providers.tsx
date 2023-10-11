@@ -16,7 +16,10 @@ export function Provider({ children, ...props }: ThemeProviderProps) {
         enableSystem
         {...props}
       >
-        <SessionProvider>{children}</SessionProvider>
+      
+        <SessionProvider>
+        {children}
+        </SessionProvider>
       </NextThemesProvider>
     </QueryClientProvider>
   );

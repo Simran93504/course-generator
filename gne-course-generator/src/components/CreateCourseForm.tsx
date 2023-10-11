@@ -14,11 +14,13 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { useToast } from "./ui/use-toast";
 import { useRouter } from "next/navigation";
+
 // import SubscriptionAction from "./SubscriptionAction";
 
 type Props = { isPro: boolean };
 
 type Input = z.infer<typeof createChaptersSchema>;
+
 
 const CreateCourseForm = ({ isPro }: Props) => {
   const router = useRouter();
@@ -49,15 +51,21 @@ const CreateCourseForm = ({ isPro }: Props) => {
       });
       return;
     }
+    form.watch();
     createChapters(data, {
+      
       onSuccess: ({ course_id}) => {
         toast({
           title: "Success",
           description: "Course created successfully",
         });
+        
         router.push(`/create/${course_id}`);
       },
+      
       onError: (error: any) => {
+        console.log("hello");
+
         console.error(error);
         toast({
           title: "Error",
